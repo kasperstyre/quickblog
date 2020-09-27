@@ -6,3 +6,37 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+body {
+    background-color: white;
+}
+
+hr.dashed {
+    border-top: 2px dashed #bbb;
+}
+
+#blogPostOverviewPage {
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+}
+
+#blogPostContainer {
+    flex: 1;
+}
+
+#blogPostContentInput {
+    resize: none;
+}
+
+.blog-post-body {
+    padding: .75rem;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.unselectable {
+    user-select: none;
+}

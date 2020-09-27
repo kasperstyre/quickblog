@@ -16,6 +16,7 @@
         Denne side kræver, at JavaScript er slået til i din browser.
         </noscript>
         <div id="app">
+            <blog-post-overview />
         </div>
 
         <script src="/js/app.js"></script>
