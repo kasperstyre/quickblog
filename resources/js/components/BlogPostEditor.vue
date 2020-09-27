@@ -88,7 +88,7 @@ export default {
     created() {
         this.$on('updateBlogPost', blogPost => {
             this.blogPostId = blogPost.id;
-            this.blogPostContent = blogPost.blogPostContent;
+            this.blogPostContent = blogPost.content;
         });
     }
 }

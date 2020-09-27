@@ -53,7 +53,7 @@
 class BlogPost {
     constructor({ id, content, created_at, updated_at, author }) {
         this.id = id;
-        this.blogPostContent = content;
+        this.content = content;
         this.creationTime = new Date(created_at);
         this.lastUpdated = new Date(updated_at);
         this.authorName = author.name;
@@ -81,7 +81,7 @@ export default {
         },
         filteredPosts() {
             return this.sortedPosts.filter(post => {
-                let searchableText = post.blogPostContent + post.authorName;
+                let searchableText = post.content + post.authorName;
 
                 return searchableText.toLowerCase().includes(this.searchQuery.toLowerCase());
             });

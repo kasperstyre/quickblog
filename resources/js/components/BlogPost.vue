@@ -14,7 +14,7 @@
                 <h6 v-else class="mb-1">{{timeStamp}}</h6>
             </div>
             <hr class="dashed mt-2 mb-2">
-            <p class="card-text">{{blogPostContent}}</p>
+            <p class="card-text">{{content}}</p>
         </div>
     </div>
 </template>
@@ -33,7 +33,7 @@ export default {
     props: {
         id: Number,
         authorName: String,
-        blogPostContent: String,
+        content: String,
         creationTime: Date,
         lastUpdated: Date,
     },
