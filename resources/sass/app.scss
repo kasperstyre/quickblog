@@ -11,6 +11,14 @@ body {
     background-color: white;
 }
 
+hr.dashed {
+    border-top: 2px dashed #bbb;
+}
+
+.blog-post-body {
+    padding: .75rem;
+}
+
 .unselectable {
     user-select: none;
 }
