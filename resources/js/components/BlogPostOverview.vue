@@ -77,7 +77,7 @@ export default {
             return this.sortedPosts.filter(post => {
                 let searchableText = post.blogPostContent + post.authorName;
 
-                return searchableText.includes(this.searchQuery);
+                return searchableText.toLowerCase().includes(this.searchQuery.toLowerCase());
             });
         },
         pagedPosts() {
