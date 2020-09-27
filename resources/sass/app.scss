@@ -15,6 +15,10 @@ hr.dashed {
     border-top: 2px dashed #bbb;
 }
 
+#blogPostContentInput {
+    resize: none;
+}
+
 .blog-post-body {
     padding: .75rem;
 }

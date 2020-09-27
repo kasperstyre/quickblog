@@ -4,6 +4,7 @@
             <a href="/" class="navbar-brand unselectable">QuickBlog</a>
         </nav>
         <div id="blogPostContainer" class="container">
+            <blog-post-editor @blogPostCreated="handleBlogPostCreated" />
             <blog-post
                 v-for="post in sortedPosts"
                 v-bind="post"
@@ -34,6 +35,11 @@ export default {
             return this.blogPosts.sort((a, b) => {
                 return b.lastUpdated - a.lastUpdated;
             });
+        },
+    },
+    methods: {
+        handleBlogPostCreated(createdBlogPost) {
+            this.blogPosts.push(new BlogPost(createdBlogPost));
         },
     },
     created() {

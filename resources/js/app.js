@@ -23,6 +23,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 Vue.component('blog-post-overview', require('./components/BlogPostOverview.vue').default);
 Vue.component('blog-post', require('./components/BlogPost.vue').default);
+Vue.component('blog-post-editor', require('./components/BlogPostEditor.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
