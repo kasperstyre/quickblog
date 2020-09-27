@@ -6,11 +6,33 @@
         <div id="blogPostContainer" class="container">
             <blog-post-editor @blogPostCreated="handleBlogPostCreated" />
             <blog-post
-                v-for="post in sortedPosts"
+                v-for="post in pagedPosts"
                 v-bind="post"
                 :key="post.id"
             ></blog-post>
         </div>
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item pointer unselectable" :class="pageNumber === 1 ? 'disabled' : null">
+                    <a class="page-link" @click="() => pageNumber -= 1">
+                        Previous
+                    </a>
+                </li>
+                <li
+                    class="page-item pointer unselectable"
+                    v-for="number in pageCount"
+                    :key="number"
+                    :class="pageNumber === number ? 'active' : null"
+                >
+                    <a class="page-link" @click="() => pageNumber = number">{{number}}</a>
+                </li>
+                <li class="page-item pointer unselectable" :class="pageNumber === pageCount ? 'disabled' : null">
+                    <a class="page-link" @click="() => pageNumber += 1">
+                        Next
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </template>
 <script>
@@ -24,17 +46,28 @@ class BlogPost {
     }
 }
 
+const POSTS_PER_PAGE = 4
+
 export default {
     data() {
         return {
             blogPosts: [],
+            pageNumber: 1,
         }
     },
     computed: {
+        pageCount() {
+            return Math.ceil(this.filteredPosts.length / POSTS_PER_PAGE)
+        },
         sortedPosts() {
             return this.blogPosts.sort((a, b) => {
                 return b.lastUpdated - a.lastUpdated;
             });
+        },
+        pagedPosts() {
+            let offset = (this.pageNumber - 1) * POSTS_PER_PAGE;
+
+            return this.sortedPosts.slice(offset, offset + POSTS_PER_PAGE);
         },
     },
     methods: {
