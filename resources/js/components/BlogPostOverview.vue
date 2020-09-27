@@ -2,6 +2,14 @@
     <div id="blogPostOverviewPage">
         <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
             <a href="/" class="navbar-brand unselectable">QuickBlog</a>
+            <form class="form-inline">
+                <input
+                    class="form-control mr-sm-2"
+                    type="search"
+                    placeholder="Search blog posts..."
+                    v-model="searchQuery"
+                >
+            </form>
         </nav>
         <div id="blogPostContainer" class="container">
             <blog-post-editor @blogPostCreated="handleBlogPostCreated" />
@@ -53,6 +61,7 @@ export default {
         return {
             blogPosts: [],
             pageNumber: 1,
+            searchQuery: '',
         }
     },
     computed: {
@@ -64,10 +73,17 @@ export default {
                 return b.lastUpdated - a.lastUpdated;
             });
         },
+        filteredPosts() {
+            return this.sortedPosts.filter(post => {
+                let searchableText = post.blogPostContent + post.authorName;
+
+                return searchableText.includes(this.searchQuery);
+            });
+        },
         pagedPosts() {
             let offset = (this.pageNumber - 1) * POSTS_PER_PAGE;
 
-            return this.sortedPosts.slice(offset, offset + POSTS_PER_PAGE);
+            return this.filteredPosts.slice(offset, offset + POSTS_PER_PAGE);
         },
     },
     methods: {
