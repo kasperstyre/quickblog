@@ -11,7 +11,10 @@
                         <delete-icon :size="18" />
                     </button>
                 </div>
-                <h6 v-else class="mb-1">{{timeStamp}}</h6>
+                <h6 v-else class="mb-1">
+                    {{ isEdited ? '(edited)' : null }}
+                    {{timeStamp}}
+                </h6>
             </div>
             <hr class="dashed mt-2 mb-2">
             <p class="card-text">{{content}}</p>
@@ -43,6 +46,9 @@ export default {
                 from: new Date(),
                 to: this.lastUpdated
             });
+        },
+        isEdited() {
+            return this.creationTime.getTime() !== this.lastUpdated.getTime();
         }
     },
     methods: {
