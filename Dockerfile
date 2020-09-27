@@ -50,6 +50,9 @@ COPY --from=frontend-compile /build /var/www
 # Copy existing application directory permissions
 COPY --from=frontend-compile --chown=www:www /build /var/www
 
+# Install PHP dependencies
+RUN composer install
+
 # Change current user to www
 USER www
 
