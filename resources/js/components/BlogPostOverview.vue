@@ -12,11 +12,17 @@
             </form>
         </nav>
         <div id="blogPostContainer" class="container">
-            <blog-post-editor @blogPostCreated="handleBlogPostCreated" />
+            <blog-post-editor
+                ref="blogPostEditor"
+                @blogPostCreated="handleBlogPostCreated"
+                @blogPostUpdated="handleBlogPostUpdated"
+            />
             <blog-post
                 v-for="post in pagedPosts"
                 v-bind="post"
                 :key="post.id"
+                @updateBlogPost="handleUpdateBlogPost"
+                @blogPostDeleted="handleBlogPostDeleted"
             ></blog-post>
         </div>
         <nav>
@@ -90,6 +96,19 @@ export default {
         handleBlogPostCreated(createdBlogPost) {
             this.blogPosts.push(new BlogPost(createdBlogPost));
         },
+        handleUpdateBlogPost(blogPostId) {
+            let foundBlogPost = this.blogPosts.find(blogPost => blogPost.id == blogPostId);
+
+            this.$refs.blogPostEditor.$emit('updateBlogPost', foundBlogPost);
+        },
+        handleBlogPostUpdated(updatedBlogPost) {
+            let blogPostIndex = this.blogPosts.findIndex(blogPost => blogPost.id === updatedBlogPost.id);
+
+            this.blogPosts.splice(blogPostIndex, 1, new BlogPost(updatedBlogPost));
+        },
+        handleBlogPostDeleted(deletedBlogPostId) {
+            this.blogPosts = this.blogPosts.filter(blogPost => blogPost.id !== deletedBlogPostId);
+        }
     },
     created() {
         axios.get('/api/blog_posts').then(response => {

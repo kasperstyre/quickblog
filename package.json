@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "vague-time": "^2.4.2"
+        "vague-time": "^2.4.2",
+        "vue-material-design-icons": "^4.9.0"
     }
 }
